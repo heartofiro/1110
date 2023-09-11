@@ -1,5 +1,7 @@
 package comp1110.ass2;
 
+import java.sql.SQLOutput;
+
 public class Player
 {
     // Store the player's current turn state (or if they're waiting for their turn)
@@ -23,22 +25,31 @@ public class Player
     /* Constructor for the Player class. Breaks down the playerString and
     assigns values. */
     public Player(String playerString)
-    // Obtain the player's colour
-    {char colorChar = playerString.charAt(1);             //Get the second char of PlayerString
-        switch (colorChar) {
-            case 'c':
-                this.playerColour = Colour.CYAN;          //If char is "c" , color of player is cyan.
-                break;
-            case 'y':
-                this.playerColour = Colour.YELLOW;        //If char is "y" , color of player is yellow.
-                break;
-            case 'r':
-                this.playerColour = Colour.RED;           //If char is "r" , color of player is red.
-                break;
-            case 'p':
-                this.playerColour = Colour.PURPLE;        //If char is "p" , color of player is purple.
-                break;
-        }
+
+        // Obtain the player's colour
+        {if (playerString.length() != 7) {
+            System.out.println("Invalid playerString! playerString must be 7 characters. ");// ensure the playerString is valid with correct length and first character.
+        } else if (playerString.charAt(0) != 'P') {
+            System.out.println("Invalid playerString! playerString must start with 'P'." );
+        } else {
+            char colorChar = playerString.charAt(1);             //Get the second char of PlayerString
+            switch (colorChar) {
+                case 'c':
+                    this.playerColour = Colour.CYAN;          //If char is "c" , color of player is cyan.
+                    break;
+                case 'y':
+                    this.playerColour = Colour.YELLOW;        //If char is "y" , color of player is yellow.
+                    break;
+                case 'r':
+                    this.playerColour = Colour.RED;           //If char is "r" , color of player is red.
+                    break;
+                case 'p':
+                    this.playerColour = Colour.PURPLE;//If char is "p" , color of player is purple.
+                    break;
+                default:
+                    System.out.println("Invalid player color!"); // If char does not match any color then output Invalid.
+                    break;
+            }
 
 
         // Obtain the player's money
@@ -59,6 +70,7 @@ public class Player
             System.out.println("Player's status is not sure!");
         }
     }
+        }
 
 
 
@@ -69,8 +81,8 @@ public class Player
              this.playerMoney -= amount;
              receiver.playerMoney += amount;
         } else {                                           //If a player don't have enough money to pay, he or she will out and pay as much as he or she can to the receiver.
-            this.playerMoney = 0;
             receiver.playerMoney += this.playerMoney;
+            this.playerMoney = 0;
             this.inGame = false;
                }
         }

@@ -1,5 +1,5 @@
 package comp1110.ass2;
-//
+
 public class Assam
 {
     public enum Rotation {NORTH, EAST, SOUTH, WEST}
