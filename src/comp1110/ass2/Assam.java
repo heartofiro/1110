@@ -5,7 +5,7 @@ public class Assam
     public enum Rotation {NORTH, EAST, SOUTH, WEST}
 
     // The location of Assam on the board
-    public static IntPair assamPosition;
+    public static Coordinate assamPosition;
 
     // The current orientation of Assam
     public static Rotation assamOrientation;
@@ -27,7 +27,7 @@ public class Assam
      * @param assamString a string representing the state of Assam
      * @return a valid IntPair
      */
-   IntPair assamStringToIntPair (String assamString)
+   Coordinate assamStringToIntPair (String assamString)
    {
        if(assamString.length() != 4) System.out.println("Invalid assamString! assamString must be 4 characters.");
 
@@ -39,7 +39,7 @@ public class Assam
        {
            int posX = Character.getNumericValue(assamPosX);
            int posY = Character.getNumericValue(assamPosY);
-           if(posX <= 7 && posY <= 7) return new IntPair (posX, posY);
+           if(posX <= 7 && posY <= 7) return new Coordinate (posX, posY);
            else
            {
                System.out.println("Invalid assamString! coordinate strings must be within the board.");
@@ -73,11 +73,11 @@ public class Assam
      * Updates the position of Assam
      * @param newPosition an IntPair for the new position coordinates
      */
-   public void updatePosition(IntPair newPosition)
+   public void updatePosition(Coordinate newPosition)
    {
        int posX = newPosition.getX();
        int posY = newPosition.getY();
-       if(posX >= 0 && posX <= 7 && posY >= 0 && posY <= 7) assamPosition = new IntPair (posX, posY);
+       if(posX >= 0 && posX <= 7 && posY >= 0 && posY <= 7) assamPosition = new Coordinate (posX, posY);
        else System.out.println("Invalid position! newPosition must be within the board.");
    }
 
@@ -109,7 +109,7 @@ public class Assam
     }
 
     // If Assam moves out of the board, return a new position based on his old position
-    public IntPair positionAfterMovingOut(IntPair oldPosition)
+    public Coordinate positionAfterMovingOut(Coordinate oldPosition)
     {
         return null;
     }

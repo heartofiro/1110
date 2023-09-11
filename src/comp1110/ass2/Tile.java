@@ -3,7 +3,7 @@ package comp1110.ass2;
 public class Tile
 {
     // The position of the tile
-    public IntPair tileCoord;
+    public Coordinate tileCoord;
 
     // Is the tile currently empty or occupied?
     public enum State {EMPTY, OCCUPIED}
@@ -16,7 +16,7 @@ public class Tile
 
     /* Constructor for the Tile class, which takes a coordinate
     and also checks if it contains Assam */
-    public Tile(IntPair coord)
+    public Tile(Coordinate coord)
     {
         // Set the tile coordinate
 

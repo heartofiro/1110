@@ -1,6 +1,6 @@
 package comp1110.ass2;
 
-public class IntPair
+public class Coordinate
 {
     private final int x;
     private final int y;
@@ -10,7 +10,7 @@ public class IntPair
      * @param xPos x
      * @param yPos y
      */
-    public IntPair(int xPos, int yPos)
+    public Coordinate(int xPos, int yPos)
     {
         this.x = xPos;
         this.y = yPos;
@@ -45,7 +45,7 @@ public class IntPair
         if(o == null) return false;
         else if(o.getClass() == getClass())
         {
-            return ((IntPair) o).getX() == x && ((IntPair) o).getY() == y;
+            return ((Coordinate) o).getX() == x && ((Coordinate) o).getY() == y;
         }
         // If, for whatever reason, the compared object is not an IntPair
         else
