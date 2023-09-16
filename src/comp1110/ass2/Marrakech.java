@@ -1,5 +1,7 @@
 package comp1110.ass2;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 public class Marrakech {
@@ -26,9 +28,46 @@ public class Marrakech {
      */
     public static boolean isRugValid(String gameString, String rug) {
         // FIXME: Task 4
-        return false;
+        if (rug.length() != 7){
+            return false;// Check the length of rugString
+        }
+        char rugColor = rug.charAt(0);
+        switch (rugColor) {
+            case 'c':
+            case 'y':
+            case 'r':
+            case 'p':
+                if (gameString.indexOf(rugColor) == -1) {
+                    return false;
+                }
+                break;
+            default:
+                return false;
+        }
+        String rugId = rug.substring(1,3);  // Check if rug's id is number and have two-digits
+        for (int i = 0; i < rugId.length(); i++){
+            if(!Character.isDigit(rugId.charAt(i))){
+                return false;
+            }
+        }
+        int id = Integer.parseInt(rugId);
+        if (id < 0 || id > 99){
+            return false;
+        }
+        String coordinateString = rug.substring(3); // Check if rug's coordinates are in the board
+        int x1 = Character.getNumericValue(coordinateString.charAt(0));
+        int y1 = Character.getNumericValue(coordinateString.charAt(1));
+        int x2 = Character.getNumericValue(coordinateString.charAt(2));
+        int y2 = Character.getNumericValue(coordinateString.charAt(3));
+        if (x1 < 0 || y1 < 0 || x2 < 0 || y2 < 0 || x1 >= 7 || y1 >= 7 || x2 >= 7 || y2 >= 7){
+            return false;
+        }
+        String combination = rugColor + rugId;// Check if color+id in gamestring
+        if (gameString.indexOf(combination) == 0){
+            return false;
+        }
+    return true;
     }
-
     /**
      * Roll the special Marrakech die and return the result.
      * Note that the die in Marrakech is not a regular 6-sided die, since there

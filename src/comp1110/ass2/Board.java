@@ -2,17 +2,18 @@ package comp1110.ass2;
 
 public class Board {
 
-    /*
-     * Board string example:
-     * Bp07p07r07r07r06r09r08y06r01c06p00r06r09c09y15c13p12p00n00y09c09y15r05y03y14c01y09n00c05c15c15r14n00r13r13n00r15r15r04n00n00n00n00n00n00n00n00p13p13
-     */
+    //Board can contain 7*7 element arrays
+    public int tileRugid;
 
-    // Board can contain 7*7 element arrays
-    public Block boardTailes[][] = new Block[7][7];
+    public Block[][] boardTailes = new Block[7][7];
 
-    public Board(String boardString) {
-        if (!boardString.startsWith("B")) {
-            return;
+    public Colour tileColor;
+
+    public Board (String boardString){
+        if (boardString.charAt(0) != 'B'){
+            System.out.println("boardString must start with 'B'");
+        } else if (boardString.length() != 148) {
+            System.out.println("boardString must contain 148 chars");
         }
 
         int column = 0, row = 0;
@@ -27,12 +28,45 @@ public class Board {
                 row = 0;
             }
         }
+
+        for (int i = 1 ; i < boardString.length() ; i+=3){
+            String tileString = boardString.substring(i , i+3);
+            if (tileString == "n00"){
+                continue;
+            }
+
+            String idString = tileString.substring(1,3);
+
+            try {
+                tileRugid = Integer.parseInt(idString);
+            } catch (NumberFormatException e) {
+                System.out.println("The string is not a valid integer.");
+            }
+
+            char colorChar = tileString.charAt(0);
+            switch (colorChar) {
+                case 'c' -> this.tileColor = Colour.CYAN;
+                case 'y' -> this.tileColor = Colour.YELLOW;
+                case 'r' -> this.tileColor = Colour.RED;
+                case 'p' -> this.tileColor = Colour.PURPLE;
+                default -> System.out.println("Can not identify tile's color");
+            }
+
+        }
     }
 
+    public Colour getTileColor() {
+        return tileColor;
+    }
+
+    public int getTileRugid() {
+        return tileRugid;
+    }
     public void placeRug(Rug rug) {
         // first piece of rug
-        boardTailes[rug.position[0].getX()][rug.position[0].getY()] = new Block(rug.colour, rug.id);
+        boardTailes[rug.position[0].getX()][rug.position[0].getY()] = new Block(rug.colour, rug.rugID);
         // second piece of rug
-        boardTailes[rug.position[1].getX()][rug.position[1].getY()] = new Block(rug.colour, rug.id);
+        boardTailes[rug.position[1].getX()][rug.position[1].getY()] = new Block(rug.colour, rug.rugID);
     }
 }
+//

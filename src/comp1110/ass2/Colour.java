@@ -1,7 +1,8 @@
 package comp1110.ass2;
 
+
 public enum Colour {
-    CYAN("c"), YELLOW("y"), RED("r"), PURPLE("p"), BLANK("b")
+    CYAN("c"), YELLOW("y"), RED("r"), PURPLE("p"), BLANK("b");
 
     private final String name;
 
@@ -11,5 +12,7 @@ public enum Colour {
 
     public String getName() {
         return this.name;
-    }
-}
+    }};
+
+
+
